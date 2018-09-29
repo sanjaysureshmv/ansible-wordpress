@@ -1,0 +1,19 @@
+---
+- name: install php 7
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+   - php7.0
+   - php7.0-mysql
+   - libapache2-mod-php7.0
+   - php7.0-cli
+   - php7.0-cgi
+   - php7.0-gd  
+- name: test php
+  copy:
+    src: info.php
+    dest: "{{wordpress_dir}}"
+ 
+ 
+ 

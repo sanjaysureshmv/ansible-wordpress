@@ -1,0 +1,70 @@
+---
+- name: Create the wordpress dir
+  file:
+    state: directory
+    path: "{{wordpress_dir}}"
+
+- name: Download the wordpress binary
+  get_url:
+     url: "{{wordpress_binary}}"
+     dest: /tmp/
+
+- name: Untar the binary from tmp
+  unarchive:
+    src: /tmp/wordpress-4.9.8.tar.gz
+    dest: "{{wordpress_dir}}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: Fetch random salts for wordpress config
+  local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
+  register: "wp_salt"
+
+- name: Copy WordPress config file
+  template: 
+    src: wp_config.j2
+    dest: "{{wordpress_dir}}/wp-config.php"
+
+- name: change ownership of installation directory
+  file:
+    state: directory
+    dest: "{{wordpress_dir}}" 
+    owner: www-data
+    group: www-data
+    mode: 0755
+    recurse: yes
+
+#- name: change permission of wp-content
+#  file:
+#    state: directory
+#    path: "{{wordpress_dir}}/wp-content/"
+#    owner: www-data
+#    group: www-data
+
+- name: Create  WordPress database
+  mysql_db:
+    config_file: "/etc/mysql/my.cnf"
+    name: "{{db_name}}"
+    state: present
+ 
+- name: Create a new database user and password
+  mysql_user:
+    config_file: "/etc/mysql/my.cnf"
+    name: "{{db_user}}"
+    password: "{{db_pass}}"
+    priv: '{{db_name}}.*:ALL'
+    state: present
+
+- name: restart apache and mysql
+  systemd:
+    name: "{{item}}"
+    state: restarted
+    enabled: true
+  with_items:
+    - apache2
+    - mysql
+- name: remove default apache page
+  file:
+    path: /var/www/html/index.html
+    state: absent
+    

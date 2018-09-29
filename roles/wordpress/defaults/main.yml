@@ -1,0 +1,9 @@
+---
+wordpress_dir: /var/www/html
+wordpress_binary: "https://wordpress.org/latest.tar.gz" #use adequate url if older version is needed
+db_name: wp_test
+db_user: wp_test_user
+db_pass: test1234
+db_host: localhost
+wp_table_prefix: 'wp_'
+wp_debug_mode: 'FALSE'

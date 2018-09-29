@@ -1,0 +1,5 @@
+---
+- include: apache_installation.yml
+- include: php_installation.yml
+- include: mysql_installation.yml
+- include: wordpress-installation.yml

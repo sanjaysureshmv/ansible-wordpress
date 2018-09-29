@@ -1,0 +1,2 @@
+[wordpress]
+52.27.26.180 ansible_user=ubuntu ansible_private_key_file=/home/ansible/devops.pem
