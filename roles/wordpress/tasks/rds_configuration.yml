@@ -1,0 +1,19 @@
+---
+- name: create rds
+  rds:
+    command: create
+    instance_name: "{{rds_instance_id}}"
+    db_engine: MySQL
+    size: 10
+    aws_access_key: AKIAID6NAP67VSMTQFFA
+    aws_secret_key: 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
+    region: "{{region}}"
+    instance_type: db.t2.small
+    db_name: "{{db_name}}"
+    username: "{{db_user}}"
+    password: "{{db_pass}}"
+    wait: yes
+#    db_security_groups:
+#      - "{{rds_sg}}"
+    wait_timeout: 900
+  register: rds

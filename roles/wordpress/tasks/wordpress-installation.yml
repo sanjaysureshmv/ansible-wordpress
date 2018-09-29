@@ -41,19 +41,19 @@
 #    owner: www-data
 #    group: www-data
 
-- name: Create  WordPress database
-  mysql_db:
-    config_file: "/etc/mysql/my.cnf"
-    name: "{{db_name}}"
-    state: present
- 
-- name: Create a new database user and password
-  mysql_user:
-    config_file: "/etc/mysql/my.cnf"
-    name: "{{db_user}}"
-    password: "{{db_pass}}"
-    priv: '{{db_name}}.*:ALL'
-    state: present
+#- name: Create  WordPress database
+#  mysql_db:
+#    config_file: "/etc/mysql/my.cnf"
+#    name: "{{db_name}}"
+#    state: present
+# 
+#- name: Create a new database user and password
+#  mysql_user:
+#    config_file: "/etc/mysql/my.cnf"
+#    name: "{{db_user}}"
+#    password: "{{db_pass}}"
+#    priv: '{{db_name}}.*:ALL'
+#    state: present
 
 - name: restart apache and mysql
   systemd:
@@ -62,7 +62,7 @@
     enabled: true
   with_items:
     - apache2
-    - mysql
+   # - mysql
 - name: remove default apache page
   file:
     path: /var/www/html/index.html

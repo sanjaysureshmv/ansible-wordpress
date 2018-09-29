@@ -1,0 +1,5 @@
+---
+- name: Install boto on hosts
+  apt:
+    name: python-boto
+    state: present

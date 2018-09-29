@@ -2,8 +2,10 @@
 wordpress_dir: /var/www/html
 wordpress_binary: "https://wordpress.org/latest.tar.gz" #use adequate url if older version is needed
 db_name: wp_test
-db_user: wp_test_user
+db_user: wp_user
 db_pass: test1234
-db_host: localhost
+rds_instance_id : wordpress-rds # unique id which is required by rds
+rds_sg: sg-0b17f5eb86394a1b0 # security group which allow connection to rds
 wp_table_prefix: 'wp_'
 wp_debug_mode: 'FALSE'
+region: us-west-2 # The region where the rds and spot instances are created
