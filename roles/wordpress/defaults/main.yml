@@ -9,3 +9,5 @@ rds_sg: sg-0b17f5eb86394a1b0 # security group which allow connection to rds
 wp_table_prefix: 'wp_'
 wp_debug_mode: 'FALSE'
 region: us-west-2 # The region where the rds and spot instances are created
+access_key: AKIAID6NAP67VSMTQFFA # use your own instead of the specified one. 
+secret_key: ri+T3RoXIdCBuoF42r40Z+MHcqh2irppWTN6zBqi # use your own instead of the specified one. 
