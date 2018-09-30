@@ -1,5 +1,5 @@
 ---
-- name: Install boto on hosts
+- name: Install boto on hosts # required for rds module to create rds instance
   apt:
     name: python-boto
     state: present
